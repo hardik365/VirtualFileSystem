@@ -1,0 +1,2 @@
+This file will contain information that the
+program will simply read and print out to the console
