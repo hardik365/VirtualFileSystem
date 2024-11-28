@@ -24,16 +24,21 @@ int main() {
     while(1){ // Infinite loop to keep the program running until the user exits
         printf("Select a command:\n\n");
         printf("[mkfl] Create a new file\n");               //Implemented
-        printf("[rmfl] delete a file\n");                   //Not yet implemented
+        printf("[rmfl] Delete a file\n");                   //Not yet implemented
+        printf("[rnfl] Rename a file\n");                     //Not yet implemented
+
         printf("[mkdr] Create a new directory\n");          //Not yet implemented
         printf("[rmdr] Delete a directory\n");              //Not yet implemented
+        printf("[rndr] Rename a directory\n");              //Not yet implemented
+
         printf("[ls] List files and directories\n");        //Not yet implemented
         printf("[cd] Change directory\n");                  //Not yet implemented
         printf("[pwd] Print current directory\n");          //Not yet implemented
-        printf("[help] Display help\n");                    //Not yet implemented
-        printf("[exit] Exit the program\n\n");              //Implemented
-        printf("Enter a command: ");
 
+        printf("[help] Display help\n");                    //Not yet implemented
+        printf("[x] Exit the program\n\n");              //Implemented
+
+        printf("Enter a command: ");
         // Read user input and store it in the command buffer
         fgets(command, sizeof(command), stdin);
 
@@ -57,7 +62,7 @@ int main() {
         }
 
         // Check if the entered command is "exit"
-        if (strcmp(command, "exit\n") == 0) {
+        if (strcmp(command, "x\n") == 0) {
             printf("\nExiting the program...\n");
             return 0;
         }
