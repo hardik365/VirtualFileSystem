@@ -19,90 +19,78 @@ int main()
     printf("**********************************************\n");
     printf("\n");
 
-    while (1)
-    { // Infinite loop to keep the program running until the user exits
+    while (1) { // Infinite loop to keep the program running until the user exits
         printf("Select a command:\n\n");
         printf("[mkfl] Create a new file\n"); // Implemented
         printf("[rmfl] Delete a file\n");     // Implemented
         printf("[rnfl] Rename a file\n");     // Implemented
-
-        printf("[mkdr] Create a new directory\n"); // Not yet implemented
-        printf("[rmdr] Delete a directory\n");     // Not yet implemented
-        printf("[rndr] Rename a directory\n");     // Not yet implemented
-
+        printf("[mkdr] Create a new directory\n"); // Implemented
+        printf("[rmdr] Delete a directory\n");     // Implemented
+        printf("[rndr] Rename a directory\n");     // Implemented
         printf("[ls] List files and directories\n"); // Implemented
-        printf("[cd] Change directory\n");           // Not yet implemented
-        printf("[pwd] Print current directory\n");   // Not yet implemented
-
-        printf("[help] Display help\n");    // Not yet implemented
+        printf("[cd] Change directory\n");           // Implemented
+        printf("[pwd] Print current directory\n");   // Implemented
+        printf("[help] Display help\n");    // Implemented
         printf("[x] Exit the program\n\n"); // Implemented
 
         printf("Enter a command: ");
-        // Read user input and store it in the command buffer
         fgets(command, sizeof(command), stdin);
 
+        // Remove trailing newline
+        command[strcspn(command, "\n")] = 0;
+
         // Convert to lowercase
-        for (int i = 0; i < (int)sizeof(command); i++)
-        {                                                          // Cast sizeof result to int
-            command[i] = (char)tolower((unsigned char)command[i]); // Explicitly cast to char
+        size_t len = strlen(command);
+        for (size_t i = 0; i < len; i++) {
+            command[i] = (char)tolower((unsigned char)command[i]);
         }
 
-        // Check if the entered command is "mkfl"
-        if (strcmp(command, "mkfl\n") == 0)
-        {
+        // Command handlers
+        if (strcmp(command, "mkfl") == 0) {
             flag = createFile();
-            if (flag == -1)
-            {
+            if (flag == -1) {
                 printf("Error creating file!\n");
-            }
-            if (flag == 2)
-            {
+            } else if (flag == 2) {
                 printf("Error: File already exists!\n");
-            }
-            if (flag == 0)
-            {
+            } else {
                 printf("File created successfully!\n");
             }
-        }
-
-        // Check if the entered command is "exit"
-        if (strcmp(command, "x\n") == 0)
-        {
-            printf("\nExiting the program...\n");
-            return 0;
-        }
-
-        if (strcmp(command, "rmfl\n") == 0)
-        {
+        } else if (strcmp(command, "rmfl") == 0) {
             flag = deleteFile();
-            if (flag == -1)
-            {
+            if (flag == -1) {
                 printf("Error deleting file!\n");
-            }
-            else
-            {
+            } else {
                 printf("File deleted successfully!\n");
             }
-        }
-
-        if (strcmp(command, "rnfl\n") == 0)
-        {
+        } else if (strcmp(command, "rnfl") == 0) {
             flag = renameFile();
-            if (flag == -1)
-            {
+            if (flag == -1) {
                 printf("Error renaming file!\n");
-            }
-            else
-            {
+            } else {
                 printf("File renamed successfully!\n");
             }
-        }
-
-        if (strcmp(command, "ls\n") == 0)
-        {
+        } else if (strcmp(command, "ls") == 0) {
             flag = listFilesAndDirectories();
+        } else if (strcmp(command, "mkdr") == 0) {
+            flag = createDirectory();
+        } else if (strcmp(command, "rmdr") == 0) {
+            flag = deleteDirectory();
+        } else if (strcmp(command, "rndr") == 0) {
+            flag = renameDirectory();
+        } else if (strcmp(command, "cd") == 0) {
+            flag = changeDirectory();
+        } else if (strcmp(command, "pwd") == 0) {
+            flag = printCurrentDirectory();
+        } else if (strcmp(command, "help") == 0) {
+            displayHelp();
+        } else if (strcmp(command, "x") == 0) {
+            printf("\nExiting the program...\n");
+            return 0;
+        } else {
+            printf("Invalid command! Type 'help' for a list of commands.\n");
         }
     }
+
 
     return 0;
 }

@@ -4,6 +4,18 @@
 #include <unistd.h>
 #include <dirent.h>
 
+#ifndef FUNC_H
+#define FUNC_H
+
+int createDirectory();
+int deleteDirectory();
+int renameDirectory();
+int changeDirectory();
+int printCurrentDirectory();
+void displayHelp();
+
+#endif
+
 // Function to create a new file
 //  Returns 0 if the file is created successfully
 //  Returns -1 if file creation fails
