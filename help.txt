@@ -1,2 +1,56 @@
-This file will contain information that the
-program will simply read and print out to the console
+Available Commands:
+
+[mkfl] Create a new file
+    - Usage: mkfl <filename>
+    - Description: Creates a new empty file in the current directory. 
+    - Example: mkfl myfile.txt
+
+[rmfl] Delete a file
+    - Usage: rmfl <filename>
+    - Description: Deletes the specified file from the current directory.
+    - Example: rmfl myfile.txt
+
+[rnfl] Rename a file
+    - Usage: rnfl <old_filename> <new_filename>
+    - Description: Renames the specified file in the current directory.
+    - Example: rnfl oldname.txt newname.txt
+
+[mkdr] Create a new directory
+    - Usage: mkdr <directory_name>
+    - Description: Creates a new directory in the current location.
+    - Example: mkdr my_directory
+
+[rmdr] Delete a directory
+    - Usage: rmdr <directory_name>
+    - Description: Deletes the specified directory if it is empty.
+    - Example: rmdr my_directory
+
+[rndr] Rename a directory
+    - Usage: rndr <old_directory_name> <new_directory_name>
+    - Description: Renames the specified directory.
+    - Example: rndr old_dir new_dir
+
+[ls] List files and directories
+    - Usage: ls
+    - Description: Displays all files and directories in the current location.
+    - Example: ls
+
+[cd] Change directory
+    - Usage: cd <directory_name>
+    - Description: Changes the current directory to the specified directory.
+    - Example: cd my_directory
+
+[pwd] Print current directory
+    - Usage: pwd
+    - Description: Displays the full path of the current directory.
+    - Example: pwd
+
+[help] Display this help menu
+    - Usage: help
+    - Description: Displays this list of available commands with their descriptions.
+    - Example: help
+
+[x] Exit the program
+    - Usage: x
+    - Description: Exits the file system program.
+    - Example: x

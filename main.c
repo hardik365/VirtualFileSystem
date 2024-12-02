@@ -1,4 +1,3 @@
-// main.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,9 +5,23 @@
 #include <ctype.h>
 #include "func.h"
 
-// main function
-int main()
-{
+// Function to display the command menu
+void displayMenu() {
+    printf("\nSelect a command:\n\n");
+    printf("[mkfl] Create a new file\n");
+    printf("[rmfl] Delete a file\n");
+    printf("[rnfl] Rename a file\n");
+    printf("[mkdr] Create a new directory\n");
+    printf("[rmdr] Delete a directory\n");
+    printf("[rndr] Rename a directory\n");
+    printf("[ls] List files and directories\n");
+    printf("[cd] Change directory\n");
+    printf("[pwd] Print current directory\n");
+    printf("[help] Display help\n");
+    printf("[x] Exit the program\n\n");
+}
+
+int main() {
     char command[50]; // Buffer to store user input
     int flag;         // Flag to store the return value of the functions
 
@@ -19,20 +32,10 @@ int main()
     printf("**********************************************\n");
     printf("\n");
 
-    while (1) { // Infinite loop to keep the program running until the user exits
-        printf("Select a command:\n\n");
-        printf("[mkfl] Create a new file\n"); // Implemented
-        printf("[rmfl] Delete a file\n");     // Implemented
-        printf("[rnfl] Rename a file\n");     // Implemented
-        printf("[mkdr] Create a new directory\n"); // Implemented
-        printf("[rmdr] Delete a directory\n");     // Implemented
-        printf("[rndr] Rename a directory\n");     // Implemented
-        printf("[ls] List files and directories\n"); // Implemented
-        printf("[cd] Change directory\n");           // Implemented
-        printf("[pwd] Print current directory\n");   // Implemented
-        printf("[help] Display help\n");    // Implemented
-        printf("[x] Exit the program\n\n"); // Implemented
+    // Display the menu once at the beginning
+    displayMenu();
 
+    while (1) { // Infinite loop to keep the program running until the user exits
         printf("Enter a command: ");
         fgets(command, sizeof(command), stdin);
 
@@ -55,6 +58,15 @@ int main()
             } else {
                 printf("File created successfully!\n");
             }
+            displayMenu();
+        } else if (strcmp(command, "meta") == 0) {
+            flag = fileMetadata();
+            if (flag == -1) {
+                printf("Problem retrieving metadata\n");
+            } else {
+                printf("File meta successful\n");
+            }
+            displayMenu();
         } else if (strcmp(command, "rmfl") == 0) {
             flag = deleteFile();
             if (flag == -1) {
@@ -62,6 +74,7 @@ int main()
             } else {
                 printf("File deleted successfully!\n");
             }
+            displayMenu();
         } else if (strcmp(command, "rnfl") == 0) {
             flag = renameFile();
             if (flag == -1) {
@@ -69,28 +82,32 @@ int main()
             } else {
                 printf("File renamed successfully!\n");
             }
+            displayMenu();
         } else if (strcmp(command, "ls") == 0) {
             flag = listFilesAndDirectories();
+            displayMenu();
         } else if (strcmp(command, "mkdr") == 0) {
             flag = createDirectory();
+            displayMenu();
         } else if (strcmp(command, "rmdr") == 0) {
             flag = deleteDirectory();
+            displayMenu();
         } else if (strcmp(command, "rndr") == 0) {
             flag = renameDirectory();
+            displayMenu();
         } else if (strcmp(command, "cd") == 0) {
             flag = changeDirectory();
+            displayMenu();
         } else if (strcmp(command, "pwd") == 0) {
             flag = printCurrentDirectory();
+            displayMenu();
         } else if (strcmp(command, "help") == 0) {
-            displayHelp();
+            displayHelp(); // Re-display menu for help
         } else if (strcmp(command, "x") == 0) {
             printf("\nExiting the program...\n");
-            return 0;
-        } else {
-            printf("Invalid command! Type 'help' for a list of commands.\n");
+            break; // Exit the loop
         }
     }
-
 
     return 0;
 }

@@ -3,6 +3,12 @@
 #include <string.h>
 #include <unistd.h>
 #include <dirent.h>
+#include <sys/stat.h>
+#include <errno.h>
+#include <dirent.h>
+#include <limits.h>
+#include <time.h>  
+#include <sys/stat.h> 
 
 #ifndef FUNC_H
 #define FUNC_H
@@ -15,6 +21,13 @@ int printCurrentDirectory();
 void displayHelp();
 
 #endif
+
+#ifndef DT_DIR
+#define DT_DIR 4
+#endif
+
+
+
 
 // Function to create a new file
 //  Returns 0 if the file is created successfully
@@ -126,4 +139,23 @@ int listFilesAndDirectories()
     // Close the directory
     closedir(dir);
     return 0;
+}
+
+//display metadata of the file
+int fileMetadata() {
+   struct stat fileStat;
+   printf("Enter the filename:");
+   char filename[100];
+   scanf("%s",filename);
+    if (stat(filename, &fileStat) < 0) {
+        return -1;
+    }
+
+    printf("File: %s\n", filename);
+    printf("Size: %lld bytes\n", (long long)fileStat.st_size); // Use %lld for off_t
+    printf("Last accessed: %s", ctime(&fileStat.st_atime));
+    printf("Last modified: %s", ctime(&fileStat.st_mtime));
+    printf("Last status change: %s\n", ctime(&fileStat.st_ctime));
+    return 0;
+
 }

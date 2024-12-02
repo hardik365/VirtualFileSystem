@@ -8,7 +8,7 @@ CFLAGS = -Wall -Wextra -std=c11
 TARGET = vfs
 
 # Source files
-SRCS = main.c
+SRCS = main.c func.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)

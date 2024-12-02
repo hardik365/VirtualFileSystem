@@ -7,6 +7,8 @@
 #include <dirent.h>
 #include <limits.h>
 
+#define PATH_MAX 4096
+
 // Create a new directory
 int createDirectory() {
     char dirname[50];
@@ -89,16 +91,19 @@ int printCurrentDirectory() {
 
 // Display help for commands
 void displayHelp() {
-    printf("\nAvailable Commands:\n");
-    printf("[mkfl] Create a new file\n");
-    printf("[rmfl] Delete a file\n");
-    printf("[rnfl] Rename a file\n");
-    printf("[mkdr] Create a new directory\n");
-    printf("[rmdr] Delete a directory\n");
-    printf("[rndr] Rename a directory\n");
-    printf("[ls] List files and directories\n");
-    printf("[cd] Change directory\n");
-    printf("[pwd] Print current directory\n");
-    printf("[help] Display this help menu\n");
-    printf("[x] Exit the program\n\n");
+    FILE *file = fopen("help.txt", "r");
+    if (file == NULL) {
+        perror("Error opening file");
+        return;
+    }
+
+    char line[1024];
+    while (fgets(line, sizeof(line), file)) {
+        printf("%s", line);
+    }
+    fclose(file);
 }
+
+
+
+
